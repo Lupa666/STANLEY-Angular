@@ -1,0 +1,19 @@
+<!-- login.component.html -->
+<div class="register-container">
+  <h2>Logowanie</h2>
+  <form (submit)="register()" #loginForm="ngForm">
+    <div>
+      <input type="email" id="email" name="email" placeholder="Email" [(ngModel)]="email" required>
+    </div>
+    <div>
+      <input type="text" id="name" name="name" placeholder="Imię" [(ngModel)]="name" required>
+    </div>
+    <div>
+      <input type="text" id="surname" name="surname" placeholder="Nazwisko" [(ngModel)]="surname" required>
+    </div>
+    <div>
+      <input type="password" id="password" name="password" placeholder="Hasło" [(ngModel)]="password" required>
+    </div>
+    <button type="submit" [disabled]="!loginForm.form.valid">Login</button>
+  </form>
+</div>
