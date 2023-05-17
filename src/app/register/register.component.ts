@@ -12,7 +12,10 @@ export class RegisterComponent {
   password: String = "";
 
   register(){
-
+    console.log("Email: " + this.email )
+    console.log("Imię: " + this.name )
+    console.log("Nazwisko: " + this.surname)
+    console.log("Hasło: " + this.password )
   }
 
 }

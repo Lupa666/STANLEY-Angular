@@ -1,6 +1,6 @@
 <!-- login.component.html -->
 <div class="register-container">
-  <h2>Logowanie</h2>
+  <h2>Rejestracja</h2>
   <form (submit)="register()" #loginForm="ngForm">
     <div>
       <input type="email" id="email" name="email" placeholder="Email" [(ngModel)]="email" required>
@@ -14,6 +14,6 @@
     <div>
       <input type="password" id="password" name="password" placeholder="Hasło" [(ngModel)]="password" required>
     </div>
-    <button type="submit" [disabled]="!loginForm.form.valid">Login</button>
+    <button type="submit" [disabled]="!loginForm.form.valid"><b>Zarejestruj się</b></button>
   </form>
 </div>
