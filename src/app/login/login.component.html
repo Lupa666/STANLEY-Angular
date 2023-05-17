@@ -1,0 +1,18 @@
+<!-- login.component.html -->
+<div class="register-container">
+  <h2>Logowanie</h2>
+  <form (submit)="login()" #loginForm="ngForm">
+    <div>
+      <input type="email" id="email" name="email" placeholder="Email" [(ngModel)]="email" required>
+    </div>
+    <div>
+      <input type="password" id="password" name="password" placeholder="Hasło" [(ngModel)]="password" required>
+    </div>
+    <div>
+      <input type="checkbox" id="remember-me">
+      <label><b>Zapamiętaj mnie</b></label>
+    </div>
+    <button type="submit" [disabled]="!loginForm.form.valid">Login</button>
+    <p (click)="passwordRecoveryRoute()"><b>Nie pamiętasz hasła?</b></p>
+  </form>
+</div>

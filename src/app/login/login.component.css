@@ -1,0 +1,51 @@
+.register-container {
+  margin: 200px auto;
+  width: 300px;
+  background-color: #EFF1F9;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.register-container h2 {
+  color: #201E50;
+  margin-bottom: 20px;
+  border-bottom: 3px solid #201E50;
+  padding-bottom: 5px;
+}
+
+.register-container input[type="text"],
+.register-container input[type="email"],
+.register-container input[type="password"] {
+  border: none;
+  border-bottom: 2px solid #201E50;
+  outline: none;
+  padding: 5px;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #EFF1F9;
+}
+
+.register-container input[type="text"]::placeholder,
+.register-container input[type="email"]::placeholder,
+.register-container input[type="password"]::placeholder {
+  color: #201E50;
+}
+
+.register-container label {
+  color: #201E50;
+}
+
+.register-container button {
+  background-color: #ADB9E3;
+  border-radius: 20px;
+  padding: 10px 40px;
+  border: none;
+  color: #201E50;
+  margin-top: 10px;
+}
+
+.register-container p {
+  margin-top: 10px;
+}
