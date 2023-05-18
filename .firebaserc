@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "stanley-45c4d": {
+      "hosting": {
+        "STANLEY": [
+          "stanley-45c4d"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "stanley-45c4d"
+  }
+}
