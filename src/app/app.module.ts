@@ -7,27 +7,29 @@ import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { RegisterComponent } from './register/register.component';
 import { AppRoutingModule } from './app-routing.module';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideDatabase,getDatabase } from '@angular/fire/database';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HeaderComponent,
-    RegisterComponent
+    RegisterComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     FormsModule,
     BrowserModule,
     AppRoutingModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
-    provideDatabase(() => getDatabase()),
-    provideFirestore(() => getFirestore())
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule
   ],
   providers: [],
   bootstrap: [AppComponent]
