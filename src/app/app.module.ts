@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-
+import { AuthGuard } from "@angular/fire/auth-guard";
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
@@ -14,6 +14,8 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import {AuthService} from "./services/auth.service";
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import {AuthService} from "./services/auth.service";
     LoginComponent,
     HeaderComponent,
     RegisterComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    DashboardComponent,
+    ConfirmEmailComponent
   ],
   imports: [
     FormsModule,
@@ -32,7 +36,7 @@ import {AuthService} from "./services/auth.service";
     AngularFirestoreModule,
     AngularFireStorageModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

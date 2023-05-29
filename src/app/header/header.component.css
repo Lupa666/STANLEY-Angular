@@ -1,6 +1,31 @@
 header {
   background-color: #C6CEEC;
-  height: 80px; /* Increased height */
-  margin-top: 0;
-  font-size: 1.6em; /* Increased font size */
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  margin-right: 40px;
+  margin-left: 40px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 60px;
+  width: auto;
+}
+
+.login-register {
+  float: right;
+  margin-right: 40px;
+}
+
+.login-register button {
+  padding: 5px 10px;
+  margin-right: 10px;
+  border: none;
+  background-color: #ddd;
 }

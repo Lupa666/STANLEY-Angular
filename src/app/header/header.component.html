@@ -1,2 +1,15 @@
 <header>
+  <div class="logo">
+    <img src="../assets/logo.png" alt="Logo">
+  </div>
+
+  <div class="login-register">
+    <ng-template [ngIf]="authService.isLoggedIn" [ngIfElse]="elseLog">
+      <button (click)="LogOut()">Wyloguj się</button>
+    </ng-template>
+    <ng-template #elseLog>
+      <button (click)="NavigateLogin()">Login</button>
+      <button (click)="NavigateRegister()">Rejestracja</button>
+    </ng-template>
+  </div>
 </header>

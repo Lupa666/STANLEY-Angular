@@ -45,7 +45,7 @@ export class AuthService {
         this.SetUserData(result.user);
         this.afAuth.authState.subscribe((user) =>{
           if(user){
-            this.router.navigate(['']) //TODO: INPUT DASHBOARD ROUTE LATER
+            this.router.navigate(['dashboard'])
           }
         });
       })
