@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {Router} from "@angular/router";
-import { user} from "@angular/fire/auth";
+import { user } from "@angular/fire/auth";
 import * as auth from 'firebase/auth';
+import {User} from "../model/user";
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {
   AngularFirestore,
@@ -37,11 +38,11 @@ export class AuthService {
   }
 
   // Sign in with email/password
-  SignIn(email: string, password: string){
+  SignIn(credentials: Credentials){
     return this.afAuth
-      .signInWithEmailAndPassword(email, password)
+      .signInWithEmailAndPassword(credentials.email, credentials.password)
       .then((result) => {
-        //this.SetUserData(result.user); //TODO: idk what it does but shit gotta work some day bruh
+        this.SetUserData(result.user);
         this.afAuth.authState.subscribe((user) =>{
           if(user){
             this.router.navigate(['']) //TODO: INPUT DASHBOARD ROUTE LATER
@@ -53,13 +54,13 @@ export class AuthService {
       })
   }
   // Sign up with email/password
-  SignUp(email: string, password: string) {
+  SignUp(credentials: Credentials) {
     return this.afAuth
-      .createUserWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(credentials.email, credentials.password)
       .then((result) => {
         /* Call the SendVerificaitonMail() function when new user sign
         up and returns promise */
-        //this.SendVerificationMail(); //TODO: weryfikacja
+        this.SendVerificationMail(); //TODO: weryfikacja
         this.SetUserData(result.user);
       })
       .catch((error) => {
@@ -108,11 +109,12 @@ export class AuthService {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
-    const userData: typeof user = {
+    const userData: User = {
       uid: user.uid,
       email: user.email,
-      name: user.name,
-      surname: user.surname,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      emailVerified: user.emailVerified,
     };
     return userRef.set(userData, {
       merge: true,

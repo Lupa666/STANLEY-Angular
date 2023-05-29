@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AuthService, Credentials} from "../services/auth.service";
 
 @Component({
   selector: 'app-register',
@@ -6,16 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  email: String = "";
-  name: String = "";
-  surname: String ="";
-  password: String = "";
+  email: string = "";
+  name: string = "";
+  surname: string ="";
+  password: string = "";
 
+  constructor(public authService: AuthService){}
   register(){
-    console.log("Email: " + this.email )
-    console.log("Imię: " + this.name )
-    console.log("Nazwisko: " + this.surname)
-    console.log("Hasło: " + this.password )
+    let registerCred: Credentials = {
+      email: this.email,
+      password: this.password
+    }
+    this.authService.SignUp(registerCred)
   }
 
 }

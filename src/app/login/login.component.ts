@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AuthService, Credentials} from "../services/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -9,12 +10,14 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
 
+  constructor(public authService: AuthService) {
+  }
   login() {
-    // Perform login logic here
-    console.log('Email:', this.email);
-    console.log('Password:', this.password);
-    // You can send an HTTP request to authenticate the user
-    // and handle the response accordingly
+    let loginCred: Credentials = {
+      email: this.email,
+      password: this.password
+    }
+    this.authService.SignIn(loginCred)
   }
   passwordRecoveryRoute() {
     console.log('Password recovery');

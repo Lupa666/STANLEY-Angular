@@ -13,6 +13,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import {AuthService} from "./services/auth.service";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     AngularFirestoreModule,
     AngularFireStorageModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
