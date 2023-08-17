@@ -54,7 +54,7 @@ export class AuthService {
       })
   }
   // Sign up with email/password
-  SignUp(credentials: Credentials) {
+  SignUp(credentials: Credentials, userInfo: any) {
     return this.afAuth
       .createUserWithEmailAndPassword(credentials.email, credentials.password)
       .then((result) => {
@@ -62,6 +62,8 @@ export class AuthService {
         up and returns promise */
         this.SendVerificationMail(); //TODO: weryfikacja
         this.SetUserData(result.user);
+        this.SetExtraUserData(result.user?.uid, userInfo)
+        localStorage.getItem('user')
       })
       .catch((error) => {
         window.alert(error.message);
@@ -72,7 +74,7 @@ export class AuthService {
     return this.afAuth.currentUser
       .then((u: any) => u.sendEmailVerification())
       .then(() => {
-        this.router.navigate(['verify-email-address']);
+        this.router.navigate(['mail-confirm']);
       });
   }
   // Reset Forggot password
@@ -109,17 +111,26 @@ export class AuthService {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
-    const userData: User = {
+    let userData = {
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
       emailVerified: user.emailVerified,
     };
     return userRef.set(userData, {
       merge: true,
     });
   }
+
+  SetExtraUserData(uid: string | undefined, userInfo: any){
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `users/${uid}`
+    );
+
+    return userRef.set(userInfo, {
+      merge: true,
+    });
+  }
+
   // Sign out
   SignOut() {
     return this.afAuth.signOut().then(() => {
@@ -127,4 +138,5 @@ export class AuthService {
       this.router.navigate(['login']);
     });
   }
+
 }

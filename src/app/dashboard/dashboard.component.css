@@ -1,0 +1,80 @@
+
+/* CSS Styling */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  height: 100px;
+  background-color: #C6CEEB;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.logo {
+  /* Insert your logo styling here */
+}
+
+.profile-picture {
+  /* Insert your profile picture styling here */
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 100px;
+  padding: 20px;
+}
+
+section {
+  background-color: #DEE3F4;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.section-title {
+  background-color: #9FA7C2;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.section-content {
+  flex-grow: 1;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  background-color: #BCC6E8;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.section-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section-button button {
+  background-color: #9FA7C2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+}
