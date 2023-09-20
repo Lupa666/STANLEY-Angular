@@ -16,6 +16,10 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import {AuthService} from "./services/auth.service";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
+import { AccountEditComponent } from './account-edit/account-edit.component';
+import { CourseMainComponent } from './course-main/course-main.component';
+import { QuizComponent } from './quiz/quiz.component';
+import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,11 @@ import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
     RegisterComponent,
     ForgotPasswordComponent,
     DashboardComponent,
-    ConfirmEmailComponent
+    ConfirmEmailComponent,
+    AccountEditComponent,
+    CourseMainComponent,
+    QuizComponent,
+    PasswordRecoveryComponent
   ],
   imports: [
     FormsModule,

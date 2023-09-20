@@ -21,4 +21,7 @@ export class HeaderComponent {
   NavigateRegister(){
     this.router.navigate(['register'])
   }
+  NavigateUserPanel(){
+    this.router.navigate(['account-edit'])
+  }
 }

@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+} from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,5 +10,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+  constructor(
+    public afs: AngularFirestore
+  ) {
+  }
 
 }

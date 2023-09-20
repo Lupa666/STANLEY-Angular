@@ -6,6 +6,7 @@
   <div class="login-register">
     <ng-template [ngIf]="authService.isLoggedIn" [ngIfElse]="elseLog">
       <button (click)="LogOut()">Wyloguj się</button>
+      <button (click)="NavigateUserPanel()">Panel użytkownika</button>
     </ng-template>
     <ng-template #elseLog>
       <button (click)="NavigateLogin()">Login</button>
