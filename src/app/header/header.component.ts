@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { AuthService } from "../services/auth.service";
 import {provideRouter, Router} from "@angular/router";
+import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from "@angular/fire/compat/firestore";
+import {first} from "rxjs";
+import {Firestore} from "@angular/fire/firestore";
 
 @Component({
   selector: 'app-header',
@@ -9,7 +12,17 @@ import {provideRouter, Router} from "@angular/router";
 })
 export class HeaderComponent {
 
-  constructor(public authService: AuthService, public router: Router) {
+  userName: string = "null"
+  userCollection?: AngularFirestoreDocument<any>;
+  constructor(public db: AngularFirestore,public authService: AuthService, public router: Router) {
+    if(authService.isLoggedIn){
+      let userInfo = JSON.parse(localStorage.getItem('user')!);
+      this.userCollection = this.db.doc(`users/${userInfo.uid}`)
+      this.userCollection.valueChanges().pipe(first()).subscribe( (user: any) =>{
+        //console.log(user.name)
+        this.userName = user.name
+      })
+    }
   }
 
   LogOut(){
