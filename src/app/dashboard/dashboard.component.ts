@@ -46,7 +46,7 @@ export class DashboardComponent {
       .valueChanges().subscribe(
         (data) => {
           this.listOfCourseIDs = data.map((obj: any) => obj.cid);
-
+          //test
           //Call for courses
           afs.collection<courseData>("courses", ref =>
             ref.where("cid", "in", this.listOfCourseIDs))
