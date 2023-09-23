@@ -37,4 +37,8 @@ export class HeaderComponent {
   NavigateUserPanel(){
     this.router.navigate(['account-edit'])
   }
+
+  NavigateDashboard() {
+    this.router.navigate([`dashboard`])
+  }
 }

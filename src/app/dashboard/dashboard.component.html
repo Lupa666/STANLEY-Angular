@@ -3,18 +3,9 @@
     <div class="section-title">
       <h2>Moje grupy</h2>
     </div>
-    <div class="section-content">
+    <div class="section-content" *ngFor="let obj of listOfCourses">
       <ul>
-        <li>Teleinf</li>
-        <li>Ti1.1</li>
-        <li>Angielski 3 sem</li>
-        <li>Angielski 3 sem</li>
-        <li>Angielski 3 sem</li>
-        <li>Angielski 3 sem</li>
-        <li>Angielski 3 sem</li>
-        <li>Angielski 3 sem</li>
-        <li>Angielski 3 sem</li>
-        <li>Angielski 3 sem</li>
+        <li (click)="OnGotoCourse(obj)">{{obj.name}}</li>
       </ul>
     </div>
     <div class="section-button">
@@ -42,13 +33,21 @@
     <div class="section-title">
       <h2>Stwórz nową grupę</h2>
     </div>
-    <div class="section-content">
+    <form class="section-content" (ngSubmit)="OnSubmitCourse()">
       <ul>
-        <li>+ dodaj członków</li>
-        <li>+ dodaj administratora grupy</li>
-        <li>+ dodaj zdjęcie grupy</li>
+        <li>
+          <label for="name">Nazwa:</label>
+          <input type="text" id="name" name="name" [(ngModel)]="courseFormData.name" required>
+        </li>
+        <li>
+          <label for="desc">Opis grupy:</label>
+          <input type="text" id="desc" name="desc" [(ngModel)]="courseFormData.desc" required>
+        </li>
       </ul>
-    </div>
+      <div class="section-button">
+        <button type="submit">Utwórz grupę</button>
+      </div>
+    </form>
   </section>
 
   <section>
