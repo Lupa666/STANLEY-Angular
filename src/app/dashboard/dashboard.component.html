@@ -54,11 +54,19 @@
     <div class="section-title">
       <h2>Wpisz kod, aby dołączyć do grupy</h2>
     </div>
-    <div class="section-content">
+    <form class="section-content" (ngSubmit)="OnSubmitCode()">
       <ul>
-        <li>Skąd wziąć kod?</li>
-        <li>Jak stworzyć kod dla swojej grupy?</li>
+        <li>
+            Skąd wziąć kod? Poproś członka grupy o udostępnienie kodu.
+        </li>
+        <li>
+          <label for="desc">Wprowadź kod:</label>
+          <input type="text" id="groupCode" name="groupCode" [(ngModel)]="courseJoinCode" required>
+        </li>
       </ul>
-    </div>
+      <div class="section-button">
+        <button type="submit">Utwórz grupę</button>
+      </div>
+    </form>
   </section>
 </main>

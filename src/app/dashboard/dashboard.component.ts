@@ -28,11 +28,12 @@ interface userCourseRelation{
 })
 export class DashboardComponent {
 
-  courseFormData: courseData = {desc: "", name: ""};
+  public courseFormData: courseData = {desc: "", name: ""};
   public coursesCollection: AngularFirestoreCollection<any>;
   public userid: string;
   public listOfCourseIDs!: string[];
   public listOfCourses!: courseData[];
+  public courseJoinCode: string = "";
   constructor(
     public afs: AngularFirestore,
     public router: Router
@@ -42,21 +43,61 @@ export class DashboardComponent {
     this.coursesCollection = afs.collection("courses")
     //Call for IDs
     afs.collection("user_course", ref =>
-        ref.where("uid", "==", this.userid).where("accepted","==","true"))
+        ref.where("uid", "==", this.userid).where("accepted","==",true))
       .valueChanges().subscribe(
         (data) => {
+          //console.log(data)
           this.listOfCourseIDs = data.map((obj: any) => obj.cid);
-          //test
           //Call for courses
           afs.collection<courseData>("courses", ref =>
             ref.where("cid", "in", this.listOfCourseIDs))
             .valueChanges().subscribe(
             (data ) => {
               this.listOfCourses = data;
+              //console.log(data)
             }
           )
         }
       )
+  }
+
+  OnSubmitCode(){
+    if(this.courseJoinCode == ""){
+      window.alert("Pole nie może być puste!!!")
+    }else if(this.courseJoinCode.length != 20){
+      window.alert("Niewłaściwy kod")
+    }else{
+      this.afs.collection("courses", ref =>
+        ref.where("cid", "==", this.courseJoinCode)).valueChanges().subscribe(
+        (data) => {
+          if(data.length > 0){
+            this.afs.collection<userCourseRelation>("user_course", ref =>
+              ref.where("cid", "==", this.courseJoinCode)
+                .where("uid", "==", this.userid)
+            ).valueChanges().subscribe(
+              (data) => {
+                if(data.length == 0){
+                  const newRelation: userCourseRelation ={
+                    accepted: false,
+                    admin: false,
+                    banned: false,
+                    cid: this.courseJoinCode,
+                    uid: this.userid
+                  }
+                  this.afs.collection("user_course").add(newRelation)
+                }else if(data[0].banned == true){
+                  window.alert("Jesteś zbanowany na tym kursie")
+                }else if(data[0].accepted == true){
+                  window.alert("Już należysz do tego kursu")
+                }
+              }
+            )
+          }else{
+            window.alert("Niewłaściwy kod (kurs nie istnieje)")
+          }
+        }
+      )
+    }
   }
 
   OnSubmitCourse(){
@@ -65,10 +106,9 @@ export class DashboardComponent {
     } else if (this.courseFormData.name == "") {
       window.alert("Opis lub nazwa nie mogą być puste!!!")
     } else {
-      console.log(this.courseFormData)
       this.coursesCollection.add(this.courseFormData).then(
         docRef => {
-          console.log(docRef.id);
+          //console.log(docRef.id);
           this.courseFormData.cid = docRef.id;
           this.courseFormData.aid = this.userid;
           this.afs.doc(`courses/${this.courseFormData.cid}`).set(
