@@ -128,9 +128,8 @@ export class DashboardComponent {
               merge: true
             }
           )
-          localStorage.setItem('current-course', JSON.stringify(this.courseFormData));
           window.alert(`Utworzono kurs "${this.courseFormData.name}"`)
-          this.router.navigate(['course-main'])
+          this.OnGotoCourse(this.courseFormData)
         }
       )
     }
