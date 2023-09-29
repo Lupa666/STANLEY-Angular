@@ -1,40 +1,58 @@
 <main>
-  <section class="left-section">
-    <div class="group-info">
-      <h2 class="course-title">Tytuł kursu</h2>
-    </div>
-    <h3 class="available-modules">Dostępne moduły</h3>
+  <section>
     <ul class="list">
-      <li class="list-item-subsection">Ti11AbcDE</li>
+      <li class="list-item-subsection"><h3 class="course-title">Nazwa: {{currentCourse.name}}</h3></li>
+      <li class="list-item-subsection"><h3 class="available-modules">Opis: {{currentCourse.desc}}</h3></li>
+      <li class="list-item-subsection"><h3 class="available-modules">Kod do dołączenia: <i>{{currentCourse.cid}}</i></h3></li>
     </ul>
+    <div class="list" *ngIf="quizList.length > 0; then thenBlock else elseBlock"></div>
+    <ul class="list">
+      <ng-template #thenBlock>
+        <li class="list-item-subsection" *ngFor="let obj of quizList; index as i">
+          {{obj.name}}
+          <button (click)="goToQuiz(i)">Wybierz</button>
+        </li>
+      </ng-template>
+      <ng-template #elseBlock>
+        <h1>
+          <b>
+            Brak quizów!
+          </b>
+        </h1>
+      </ng-template>
+    </ul>
+  </section>
+  <section *ngIf="userCourseRelation.admin">
     <ul class="list">
       <li class="list-item-subsection">
-        <div class="picture-section">
-          <p>Kurs1</p>
-
-        </div>
-        <div class="picture-section">
-          <p>Kurs2</p>
-
-        </div>
-        <div class="picture-section">
-          <p>Kurs3</p>
-
-        </div>
-        <div class="picture-section">
-          <p>Kurs4</p>
-
-        </div>
-        <div class="picture-section">
-          <p>Kurs5</p>
-
-        </div>
-        <div class="picture-section">
-          <p>Kurs6</p>
-
-        </div>
+        <h2 class="course-title">PANEL ADMINA</h2>
+      </li>
+      <li class="list-item-subsection" *ngFor="let user of usersToAdmin">
+          <p>Admin: {{user.admin}}</p>
+          <p>Zaakceptowany: {{user.accepted}}</p>
+          <p>Zbanowany: {{user.banned}}</p>
+          <p>Imię: {{user.name + user.surname}}</p>
+          <button *ngIf="!user.accepted" (click)="AcceptUser(user.uid)">AKCEPTUJ</button>
+          <button *ngIf="!user.banned && !user.admin" (click)="BanUser(user.uid)">BANUJ</button>
+          <button *ngIf="user.banned && !user.admin" (click)="UnBanUser(user.uid)">ODBANUJ</button>
       </li>
     </ul>
+  </section>
+  <section>
+    <div class="group-info">
+      <h2 class="course-title">DODAJ QUIZ</h2>
+    </div>
+    <form class="section-content" (ngSubmit)="OnSubmitQuiz()">
+      <ul>
+        <li>
+          <label for="name">Nazwa:</label>
+          <input type="text" id="name" name="name" [(ngModel)]="quizInfo.name" required>
+        </li>
+      </ul>
+      <div class="section-button">
+        <button type="submit">Utwórz quiz!</button>
+      </div>
+    </form>
   </section>
 </main>
 

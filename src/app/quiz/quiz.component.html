@@ -1,28 +1,49 @@
 <body>
 <main>
   <div class="section-container">
+    <section *ngIf="showQuizInputPopup" class="left-section">
+      <div class="login-popup-content">
+        <button class="close" (click)="closeQuizInputPopup()">Zamknij</button>
+        <!-- Add your login form here -->
+        <h2>Login Form</h2>
+        <form (ngSubmit)="onSubmitQuestion()">
+          <ul>
+            <li>
+              <label for="question" >Question:</label>
+              <input name="question" type="text" id="question" [(ngModel)]="quizInput.question" required>
+            </li>
+            <li>
+              <label for="answer">Answer:</label>
+              <input name="answer" type="text" id="answer" [(ngModel)]="quizInput.answer" required>
+            </li>
+            <li>
+              <button type="submit">Zapisz</button>
+            </li>
+          </ul>
+        </form>
+      </div>
+    </section>
     <section class="left-section">
       <div class="group-info">
         <!-- Insert the group picture here -->
         <!-- Replace the src attribute with the URL of the group picture -->
-        <h2 class="course-title">Tytuł kursu</h2>
+        <h2 class="course-title">{{quizName}}</h2>
       </div>
       <div class="button-container">
         <!-- Add four buttons here -->
-        <button class="button" id="add">+Dodaj nową fiszkę</button>
-        <button class="button" id="test-mode">tryb testu</button>
-        <button class="button" id="learn-mode">tryb nauki</button>
-        <button class="button" id="my-Lists">Moje listy</button>
+        <button class="button" id="add" (click)="openQuizInputPopup()">+Dodaj nową fiszkę</button>
+        <button class="button" id="test-mode" (click)="testMode()">tryb testu</button>
+        <button class="button" id="learn-mode" (click)="learningMode()">tryb nauki</button>
+        <!--<button class="button" id="my-Lists">Moje listy</button> -->
       </div>
-      <ul class="question-list">
-        <li class="question-item correct">
-          <p>Pytanie 1: OFDMBRRR?</p>
-        </li>
-        <li class="question-item incorrect">
-          <p>Pytanie 2: Dlaczego?</p>
-        </li>
-        <!-- Add more questions as needed, and apply the "correct" or "incorrect" class accordingly -->
-      </ul>
+      <div class="section-content" *ngIf="questionList">
+        <ul class="question-list" *ngFor="let obj of questionList; index as i">
+          <li>Pytanie {{i+1}}: {{obj.question}}</li>
+          <li *ngIf="!mode">Odpowiedź {{i+1}}: {{obj.answer}}</li>
+          <li class="hidden" id="{{'answer' + i}}" *ngIf="mode">Odpowiedź {{i+1}}: {{obj.answer}}</li>
+          <button *ngIf="mode" (click)="showAnswer(i)">POKAŻ ODPOWIEDŹ</button>
+        </ul>
+      </div>
     </section>
 
     <!-- Second Section with Two Buttons (No Flex) -->

@@ -1,0 +1,143 @@
+/* CSS Styling */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  height: 100px;
+  background-color: #C6CEEB;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.logo {
+  /* Insert your logo styling here */
+}
+
+main {
+  display: flex;
+  justify-content: flex-start; /* Align the section to the left side */
+  padding: 20px;
+  margin-left: 100px; /* Add 100px left margin */
+  flex-direction: column; /* Adjust the main container to a column layout */
+  align-items: center; /* Center align content horizontally */
+}
+
+.left-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.group-picture {
+  width: 100px; /* Adjust the width of the group picture */
+}
+
+.group-info {
+  display: flex;
+  align-items: center;
+}
+
+.course-title {
+  font-size: 24px;
+  text-decoration: underline;
+  margin-left: 10px;
+}
+
+.quiz-section {
+  font-size: 20px;
+  background-color: #9FA7C2; /* Set the background color to #9FA7C2 */
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+}
+
+.question-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.question-item {
+  background-color: #BCC6E8; /* Updated background color for the question items */
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0; /* Set margin for each question item */
+  position: relative; /* Add relative positioning for pseudo-elements */
+}
+
+/* Add a green circle for correct questions */
+.question-item.correct::after {
+  content: "✔"; /* Use a checkmark character */
+  color: green; /* Green color for correct */
+  font-size: 20px; /* Adjust the size as needed */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  margin-left: 10px; /* Add left margin for padding */
+}
+
+/* Add a red circle for incorrect questions */
+.question-item.incorrect::after {
+  content: "✘"; /* Use a cross character */
+  color: red; /* Red color for incorrect */
+  font-size: 20px; /* Adjust the size as needed */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  margin-left: 10px; /* Add left margin for padding */
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between; /* Spread buttons horizontally */
+  width: 100%; /* Full width of the container */
+  margin-bottom: 20px; /* Add spacing between buttons and questions */
+}
+
+.button {
+  flex: 1; /* Take up all available width */
+  background-color: #9FA7C2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+  margin-right: 10px; /* Add right margin for spacing between buttons */
+}
+
+.section-container {
+  display: flex; /* Display sections in a flex layout */
+  justify-content: space-between; /* Space sections apart */
+  align-items: center; /* Center-align sections vertically */
+  width: 100%; /* Ensure full width of the container */
+}
+
+section {
+  flex: 1; /* Equal width for both sections */
+  background-color: #DEE3F4;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px; /* Add margin between sections */
+}
+
+/* Add a class for the second section without flex */
+.no-flex {
+  display: grid; /* Change to a block layout without flex */
+  width: 40%; /* Adjust the width of the second section */
+}
+#b1,#b2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.hidden{
+  display: none;
+}

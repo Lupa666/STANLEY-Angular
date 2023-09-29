@@ -42,8 +42,10 @@ export class DashboardComponent {
     this.userid = JSON.parse(localStorage.getItem('user')!).uid
     this.coursesCollection = afs.collection("courses")
     //Call for IDs
-    afs.collection("user_course", ref =>
-        ref.where("uid", "==", this.userid).where("accepted","==",true))
+    afs.collection<userCourseRelation>("user_course", ref =>
+        ref.where("uid", "==", this.userid)
+          .where("accepted","==",true)
+          .where("banned", "==", false))
       .valueChanges().subscribe(
         (data) => {
           //console.log(data)
@@ -84,14 +86,14 @@ export class DashboardComponent {
                     cid: this.courseJoinCode,
                     uid: this.userid
                   }
-                  this.afs.collection("user_course").add(newRelation)
+                  this.afs.doc(`user_course/${newRelation.uid}_${newRelation.cid}`).set(newRelation)
                 }else if(data[0].banned == true){
                   window.alert("Jesteś zbanowany na tym kursie")
                 }else if(data[0].accepted == true){
                   window.alert("Już należysz do tego kursu")
                 }
               }
-            )
+            ).unsubscribe()
           }else{
             window.alert("Niewłaściwy kod (kurs nie istnieje)")
           }
